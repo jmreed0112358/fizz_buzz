@@ -34,7 +34,7 @@ int main( int argc, char* argv[] )
    min = atoi( argv[3] );
    max = atoi( argv[4] );
 
-   for ( i = min ; i != max ; i++ )
+   for ( i = min ; i <= max ; i++ )
    {
 
       x = i % f;
