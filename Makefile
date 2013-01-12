@@ -33,17 +33,24 @@ OFLAGS = -Wall -g -o
 IFLAGS =
 LFLAGS =
 
-$(APP_NAME)$(SUFFIX): fizz_buzz.o
-	g++ $(OFLAGS) $(APP_NAME) fizz_buzz.o $(LFLAGS)
+all: fizz_buzz fizz_buzz_unit
+
+fizz_buzz: fizz_buzz.o fizz_buzz_main.o
+	g++ $(OFLAGS) fizz_buzz fizz_buzz.o fizz_buzz_main.o $(LFLAGS)
+
+fizz_buzz_unit: fizz_buzz.o fizz_buzz_unit.o
+	g++ $(OFLAGS) fizz_buzz_unit fizz_buzz.o fizz_buzz_unit.o $(LDFLAGS)
+
+fizz_buzz_main.o: $(STATE)/fizz_buzz_main.cxx
+	g++ $(CFLAGS) $(IFLAGS) $(STATE)/fizz_buzz_main.cxx
 
 fizz_buzz.o: $(STATE)/fizz_buzz.cxx
 	g++ $(CFLAGS) $(IFLAGS) $(STATE)/fizz_buzz.cxx
 
+fizz_buzz_unit.o: $(STATE)/fizz_buzz_unit.cxx
+	g++ $(CFLAGS) $(IFLAGS) $(STATE)/fizz_buzz_unit.cxx
+
 clean:
-	$(RM) $(APP_NAME)$(SUFFIX)
+	$(RM) fizz_buzz fuzz_buzz_unit
 	$(RM) *.o
-
-all:
-	@make $(APP_NAME)
-
 

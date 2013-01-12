@@ -1,5 +1,5 @@
 // Author: Jeremy Reed
-// File: Fizz Buzz
+// File: fizz_buzz.h
 // Date: 1-12-2013
 // Contributors: NONE
 // Purpose: Fizz Buzz test program.
