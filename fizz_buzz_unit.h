@@ -7,6 +7,6 @@
 #ifndef FIZZ_BUZZ_UNIT_H
 #define FIZZ_BUZZ_UNIT_H
 
-   int check_input_unit( );
+   int process_input_unit( );
 
 #endif

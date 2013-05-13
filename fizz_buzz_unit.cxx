@@ -10,23 +10,36 @@
 
 using namespace std;
 
+/////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////
+
 int main( int argc, char** argv )
 {
-   check_input_unit( );
+   process_input_unit( );
 
    return 0;
 }
 
-// Test check_input(...)
-int check_input_unit( )
+/////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////
+
+// Test process_input(...)
+int process_input_unit( )
 {
 
    cout << "Check the program's output if expecting an error." << endl;
    cout << "Multiple errors can occur." << endl << endl;
 
-   // Test correct input.  check_input should return 0 here.
+   long int f = 0;
+   long int g = 0;
+   long int min = 0;
+   long int max = 0;
+
+   // Test correct input.  process_input should return 0 here.
    cout << "Test correct input." << endl;
-   if ( check_input( 3, 5, 1, 100 ) )
+   if ( process_input( "3", "5", "1", "100", &f, &g, &min, &max ) )
    {
       cout << "Test FAILED." << endl;
    }
@@ -36,9 +49,9 @@ int check_input_unit( )
    }
    cout << endl;
 
-   // Test f <= 0.  (f == 0).  check_input should return 1 here.
+   // Test f <= 0.  (f == 0).  process_input should return 1 here.
    cout << "Test f <= 0. (f == 0)." << endl;
-   if ( check_input( 0, 3, -20, 100 ) )
+   if ( process_input( "0", "3", "-20", "100", &f, &g, &min, &max ) )
    {
       cout << "Test PASSED." << endl;
    }
@@ -48,9 +61,9 @@ int check_input_unit( )
    }
    cout << endl;
 
-   // Test f <= 0. (f < 0).  check_input should return 1 here.
+   // Test f <= 0. (f < 0).  process_input should return 1 here.
    cout << "Test f <= 0. (f < 0)." << endl;
-   if ( check_input( -10, 3, -20, 100 ) )
+   if ( process_input( "-10", "3", "-20", "100", &f, &g, &min, &max ) )
    {
       cout << "Test PASSED." << endl;
    }
@@ -60,9 +73,9 @@ int check_input_unit( )
    }
    cout << endl;
 
-   // Test f > g.  check_input should return 1 here.
+   // Test f > g.  process_input should return 1 here.
    cout << "Test f > g." << endl;
-   if ( check_input( 5, 3, 1, 100 ) )
+   if ( process_input( "5", "3", "1", "100", &f, &g, &min, &max ) )
    {
       cout << "Test PASSED." << endl;
    }
@@ -72,9 +85,9 @@ int check_input_unit( )
    }
    cout << endl;
 
-   // Test f = g.  check_input should return 1 here.
+   // Test f = g.  process_input should return 1 here.
    cout << "Test f == g." << endl;
-   if ( check_input( 5, 5, 1, 100 ) )
+   if ( process_input( "5", "5", "1", "100", &f, &g, &min, &max ) )
    {
       cout << "Test PASSED." << endl;
    }
@@ -86,7 +99,7 @@ int check_input_unit( )
 
    // Test min <= 0. (min == 0)
    cout << "Test min <= 0. (min == 0)." << endl;
-   if ( check_input( 3, 5, 0, 100 ) )
+   if ( process_input( "3", "5", "0", "100", &f, &g, &min, &max ) )
    {
       cout << "Test PASSED." << endl;
    }
@@ -98,7 +111,7 @@ int check_input_unit( )
 
    // Test min <= (min < 0)
    cout << "Test min <= 0. (min < 0)." << endl;
-   if ( check_input( 3, 5, -20, 100 ) )
+   if ( process_input( "3", "5", "-20", "100", &f, &g, &min, &max ) )
    {
       cout << "Test PASSED." << endl;
    }
@@ -110,7 +123,7 @@ int check_input_unit( )
 
    // Test max <= 0. (max == 0)
    cout << "Test max <= 0. (max == 0)." << endl;
-   if ( check_input( 3, 5, 1, 0 ) )
+   if ( process_input( "3", "5", "1", "0", &f, &g, &min, &max ) )
    {
       cout << "Test PASSED." << endl;
    }
@@ -122,7 +135,7 @@ int check_input_unit( )
 
    // Test max <= 0. (max < 0)
    cout << "Test max <= 0. (max < 0)." << endl;
-   if ( check_input( 3, 5, 1, -10 ) )
+   if ( process_input( "3", "5", "1", "-10", &f, &g, &min, &max ) )
    {
       cout << "Test PASSED." << endl;
    }
@@ -134,7 +147,7 @@ int check_input_unit( )
 
    // Test min > max.
    cout << "Test min > max." << endl;
-   if ( check_input( 3, 5, 10, 5 ) )
+   if ( process_input( "3", "5", "10", "5", &f, &g, &min, &max ) )
    {
       cout << "Test PASSED." << endl;
    }
@@ -144,5 +157,35 @@ int check_input_unit( )
    }
    cout << endl;
 
+   // Test inputs larger than LONG_MAX. 
+   // f > LONG_MAX.
+   cout << "Test f > LONG_MAX." << endl;
+   if ( process_input( "3433434353453523452345234523452345", "5", "1", "100",
+                       &f, &g, &min, &max ) )
+   {
+      cout << "Test PASSED." << endl;
+   }
+   else
+   {
+      cout << "Test FAILED." << endl;
+   } 
+
+   // g > LONG_MAX.
+   cout << "Test g > LONG_MAX." << endl;
+   if ( process_input( "3", "34345345352345234523452345235234", "1", "100",
+                       &f, &g, &min, &max ) )
+   {
+      cout << "Test PASSED." << endl;
+   }
+   else
+   {
+      cout << "Test FAILED." << endl;
+   }
+
    return 0;
 }
+
+/////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////
+

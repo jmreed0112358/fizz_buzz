@@ -11,13 +11,17 @@
 
 using namespace std;
 
+/////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////
+
 int main( int argc, char* argv[] )
 {
 
-   int f = 0;
-   int g = 0;
-   int min = 0;
-   int max = 0;
+   long int f = 0;
+   long int g = 0;
+   long int min = 0;
+   long int max = 0;
 
    if ( argc != 5 )
    {
@@ -32,18 +36,18 @@ int main( int argc, char* argv[] )
            << "max: " << argv[4] << endl << endl;
    }
 
-   f = atoi( argv[1] );
-   g = atoi( argv[2] );
-   min = atoi( argv[3] );
-   max = atoi( argv[4] );
-
-   if ( check_input( f, g, min, max ) )
+   if ( process_input( argv[1], argv[2], argv[3], argv[4],
+                       &f, &g, &min, &max ) )
    {
-      cout << "Check your input!" << endl;
       print_usage( );
-      exit(-1);
+      exit( -1 );
    }
 
    run( f, g, min, max );
    return 0;
 }
+
+/////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////
+

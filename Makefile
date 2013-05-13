@@ -51,6 +51,7 @@ fizz_buzz_unit.o: $(STATE)/fizz_buzz_unit.cxx
 	g++ $(CFLAGS) $(IFLAGS) $(STATE)/fizz_buzz_unit.cxx
 
 clean:
-	$(RM) fizz_buzz fuzz_buzz_unit
+	$(RM) fizz_buzz
+	$(RM) fizz_buzz_unit
 	$(RM) *.o
 

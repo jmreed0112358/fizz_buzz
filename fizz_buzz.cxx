@@ -11,13 +11,66 @@
 
 using namespace std;
 
+/////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////
+
 int
-run( int f, int g, int min, int max )
+process_input( const char* F, const char* G, const char* MIN, const char* MAX,
+               long int* f, long int* g, long int* min, long int* max )
+{
+   int retval = 0;
+
+   errno = 0;
+   *f = strtol( F, NULL, 10 );
+   if ( errno != 0 )
+   {
+      cout << "Error: " <<  strerror( errno ) << endl;
+      retval = 1;
+   }
+   if ( *f == LONG_MAX || *f == LONG_MIN )
+   {
+      cout << "Error: f: Over/Underflow." << endl;
+      retval = 1;
+   }
+
+   *g = strtol( G, NULL, 10 );
+   if ( *g == LONG_MAX || *g == LONG_MIN )
+   {
+      cout << "Error: g: Over/Underflow." << endl;
+      retval = 1;
+   }
+
+   *min = strtol( MIN, NULL, 10 );
+   if ( *min == LONG_MAX || *min == LONG_MIN )
+   {
+      cout << "Error: min: Over/Underflow." << endl;
+      retval = 1;
+   }
+
+   *max = strtol( MAX, NULL, 10 );
+   if ( *max == LONG_MAX || *max == LONG_MIN )
+   {
+      cout << "Error: max: Over/Underflow." << endl;
+      retval = 1;
+   }
+
+   retval = check_input( *f, *g, *min, *max );
+
+   return retval;
+}
+
+/////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////
+
+int
+run( long int f, long int g, long int min, long int max )
 {
 
-   int i = 0;
-   int x = 0;
-   int y = 0;
+   long int i = 0;
+   long int x = 0;
+   long int y = 0;
 
    for ( i = min ; i <= max ; i++ )
    {
@@ -50,63 +103,87 @@ run( int f, int g, int min, int max )
 
 }
 
+/////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////
+
 int
-check_input( int f, int g, int min, int max )
+check_input( const long int f, const long int g, 
+             const long int min, const long int max )
 {
+
+   int retval = 0;
+
+   cout << "f:       " << f << endl
+        << "g:       " << g << endl
+        << "min:     " << min << endl
+        << "max:     " << max << endl
+        << "LONG_MAX: " << LONG_MAX << endl
+        << "LONG_MIN: " << LONG_MIN << endl;
+
    // Range Checks:
-   if ( f <= 0 || f > INT_MAX )
+   if ( f <= 0 || f >= LONG_MAX )
    {
       cout << "Error: f is outside the permitted range." << endl;
-      return 1;
+      retval = 1;
    }
 
-   if ( g <= 0 || g > INT_MAX )
+   if ( g <= 0 || g >= LONG_MAX )
    {
       cout << "Error: g is outside the permitted range." << endl;
-      return 1;
+      retval = 1;
    }
 
    if ( f > g )
    {
       cout << "Error: f > g." << endl;
-      return 1;
+      retval = 1;
    }
 
    if ( f == g )
    {
       cout << "Error: f == g." << endl;
-      return 1;
+      retval = 1;
    }
 
-   if ( min <= 0 || min > INT_MAX )
+   if ( min <= 0 || min >= LONG_MAX || min <= LONG_MIN )
    {
       cout << "Error: min is outside the permitted range." << endl;
-      return 1;
+      retval = 1;
    }
 
-   if ( max <= 0 || max > INT_MAX )
+   if ( max <= 0 || max >= LONG_MAX || max <= LONG_MIN )
    {
       cout << "Error: max is outside the permitted range." << endl;
-      return 1;
+      retval = 1;
    }
 
    if ( min > max )
    {
       cout << "Error: min > max." << endl;
-      return 1;
+      retval = 1;
    }
 
-   return 0;
+   return retval;
 }
+
+/////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////
 
 void
 print_usage( )
 {
    cout << "usage: fizz_buzz <f> <g> <min> <max>" << endl
         << "f, g: Numbers to check for divisiblity" << endl
-        << "      Must be in the range 0 < f,g, <= " << INT_MAX << endl
+        << "      Must be in the range 0 < f,g, <= " << LONG_MAX << endl
         << "      Also, f != 0, f < g." << endl
         << "min, max: Range of numbers to test against." << endl
-        << "          Must be in the range 0 < min,max <= " << INT_MAX << endl
+        << "          Must be in the range 0 < min,max <= " << LONG_MAX << endl
         << "          And min < max." << endl << endl;
 }
+
+/////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////
+
