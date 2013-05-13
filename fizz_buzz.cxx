@@ -11,6 +11,51 @@
 
 using namespace std;
 
+
+/////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////
+
+int
+run( const long int f, const long int g,
+     const long int min, const long int max )
+{
+
+   long int i = 0;
+   long int x = 0;
+   long int y = 0;
+
+   for ( i = min ; i <= max ; i++ )
+   {
+
+      // Compute remainders
+      x = i % f;
+      y = i % g;
+
+
+      // Check remainders.
+      if ( ( x == 0 ) && ( y == 0 ) )
+      {
+         cout << i << " FizzBuzz" << endl;
+      }
+      else if ( ( x == 0 ) && ( y != 0 ) )
+      {
+         cout << i << " Fizz" << endl;
+      }
+      else if ( ( x != 0 ) && ( y == 0 ) )
+      {
+         cout << i << " Buzz" << endl;
+      }
+      else
+      {
+         cout << i << endl;
+      }
+   }
+
+   return 0;
+
+}
+
 /////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////
@@ -58,49 +103,6 @@ process_input( const char* F, const char* G, const char* MIN, const char* MAX,
    retval = check_input( *f, *g, *min, *max );
 
    return retval;
-}
-
-/////////////////////////////////////////////////////////////////////
-
-/////////////////////////////////////////////////////////////////////
-
-int
-run( long int f, long int g, long int min, long int max )
-{
-
-   long int i = 0;
-   long int x = 0;
-   long int y = 0;
-
-   for ( i = min ; i <= max ; i++ )
-   {
-
-      // Compute remainers.
-      x = i % f;
-      y = i % g;
-
-      
-      // Check remainders.
-      if ( ( x == 0 ) && ( y == 0 ) )
-      {
-         cout << i << " FizzBuzz" << endl;
-      }
-      else if ( ( x == 0 ) && ( y != 0 ) )
-      {
-         cout << i << " Fizz" << endl;
-      }
-      else if ( ( x != 0 ) && ( y == 0 ) )
-      {
-         cout << i << " Buzz" << endl;
-      }
-      else
-      {
-         cout << i << endl;
-      }
-   }
-
-   return 0;
-
 }
 
 /////////////////////////////////////////////////////////////////////
